@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/elementIndex.css">
+    <link rel="stylesheet" href="css/elementUiIndex2.css">
+    <style>
+        .login-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #eee;
+        }
+        .login-card{
+            width: 400px;
+            padding: 20px;
+        }
+        .title{
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #409eff;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <template>
+            <div class="login-container">
+                <el-card class="login-card">
+                    <div class="title">用户注册</div>
+                    <el-form :model="loginInfo">
+                        <el-form-item>
+                            <el-input v-model="loginInfo.username" placeholder="请输入用户名"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-input v-model="loginInfo.password" placeholder="请输入密码" type="password" show-password></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-input v-model="loginInfo.nickname" placeholder="请输入昵称"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-input v-model="loginInfo.age" placeholder="年龄" type="number"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-select v-model="loginInfo.sex">
+                                <el-option label="男" value="0"></el-option>
+                                <el-option label="女" value="1"></el-option>
+                                <el-option label="位置" value="2"></el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-input v-model="loginInfo.address" placeholder="地址"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" style="width: 100%" @click="login">注册</el-button>
+                        </el-form-item>
+                    </el-form>
+                </el-card>
+            </div>
+        </template>
+    </div>
+
+    <!--引入脚本文件-->
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/elementVue.js"></script>
+    <script src="js/elementIndex.js"></script>
+    <script>
+        new Vue({
+            //在标签之中的适用范围
+            el:"#app",
+            //定义页面中的变量
+            data(){
+                return{
+                    loginInfo:{
+                        username:"",
+                        password:"",
+                        sex:"",
+                        age:"",
+                        address:"",
+                        nickname:""
+                    }
+                }
+            },
+            //方法的定义位置
+            methods:{
+                login(){
+                    console.log(this.loginInfo);
+                    //发送请求到servlet
+                    $.ajax({
+                        url:"/register",
+                        type:"post",
+                        data:this.loginInfo,
+                        success(res){
+                            if(res.msg=="请求成功"){
+                                alert("注册成功")
+                                window.location.href='./login.html'
+                            }else{
+                                alert(res.msg)
+                            }
+                            // alert(JSON.stringify(res))
+                        }
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>

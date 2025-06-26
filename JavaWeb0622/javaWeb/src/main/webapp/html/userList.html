@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/elementIndex.css">
+    <link rel="stylesheet" href="css/elementUiIndex2.css">
+</head>
+<body>
+    <div id="app">
+        <template>
+            <el-table style="width: 100%" :data="userList">
+                <el-table-column prop="id" label="id"></el-table-column>
+                <el-table-column prop="username" label="用户名"></el-table-column>
+                <el-table-column prop="password" label="密码"></el-table-column>
+                <el-table-column prop="nickname" label="昵称"></el-table-column>
+                <el-table-column prop="sex" label="性别"></el-table-column>
+                <el-table-column prop="age" label="年龄"></el-table-column>
+                <el-table-column prop="address" label="地址"></el-table-column>
+                <el-table-column prop="insertDate" label="插入事件"></el-table-column>
+            </el-table>
+        </template>
+    </div>
+
+    <!--引入脚本文件-->
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/elementVue.js"></script>
+    <script src="js/elementIndex.js"></script>
+    <script>
+        new Vue({
+            //在标签之中的适用范围
+            el:"#app",
+            //定义页面中的变量
+            data(){
+                return{
+                    username:"",
+                    userList:[]
+                }
+            },
+            //页面加载的时候会执行的代码
+            created(){
+                this.getUserList();
+            },
+            //方法的定义位置
+            methods:{
+                getUserList(){
+                    var that = this;
+                    $.ajax({
+                        url:"/userList",
+                        type:"post",
+                        data:{username:this.username},
+                        success(res){
+                            if(res.msg=='请求成功'){
+                                that.userList = res.data;
+                                console.log(that.userList)
+                            }
+                        }
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>

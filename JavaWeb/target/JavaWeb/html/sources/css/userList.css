@@ -1,0 +1,30 @@
+/* 自定义样式 */
+.el-row {
+    margin-top: 20px;
+}
+.el-col {
+    padding: 10px;
+}
+.el-menu-vertical-demo {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+.el-table {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+.search-box {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f5f7fa;
+    border-radius: 4px;
+    height: auto;
+}
+#userlist{
+    /*position: fixed;*/
+    overflow-y: auto;
+    height: 80vh;
+}
+.tac{
+    border-radius: 4px;
+}
